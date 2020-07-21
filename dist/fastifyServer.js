@@ -5,6 +5,16 @@ const server = fastify_1.default();
 const routes_1 = require("./routes");
 server.register(require('fastify-formbody'));
 server.register(routes_1.default);
+server.register(require('fastify-cors'), {
+    origin: (origin, cb) => {
+        if (/localhost/.test(origin)) {
+            //  Request from localhost will pass
+            cb(null, true);
+            return;
+        }
+        cb(new Error("Not allowed"), false);
+    }
+});
 const start = async () => {
     try {
         await server.listen(3000);
