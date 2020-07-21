@@ -15,5 +15,8 @@ Exemple:
   * `curl -X "POST" --data "post="My%20First%20Post&likes=10&comment=A%20comment" http://localhost:3000/posts`
   * `curl -X "DELETE" http://localhost:3000/posts/3`
   * `curl -X "PUT" --data "post=My%20Modyfied%20Post&likes=20" http://localhost:3000/posts/4`
-  
+
+Or in JSON:
+  * `curl --header "Content-Type: application/json" --request POST --data '{"post":"A post","likes":15}' http://localhost:3000/posts`
+
 The database configuration is defined in `knexDatabaseConf.ts`, we use mysql but can change, the table name as well as the database for this project is "blog" 
