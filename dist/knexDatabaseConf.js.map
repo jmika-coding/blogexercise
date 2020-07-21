@@ -1,0 +1,1 @@
+{"version":3,"file":"knexDatabaseConf.js","sourceRoot":"","sources":["../src/knexDatabaseConf.ts"],"names":[],"mappings":";;;AAAA,6BAA4B;AAE5B,MAAM,QAAQ,GAAG;IACb,MAAM,EAAE,OAAO;IACf,UAAU,EAAE;QACR,IAAI,EAAE,WAAW;QACjB,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,UAAU;QACpB,QAAQ,EAAE,MAAM;KACnB;CACJ,CAAA;AAEY,QAAA,IAAI,GAAG,IAAI,CAAC,QAAQ,CAAC,CAAC"}
