@@ -10,13 +10,10 @@ To lunch project:
   
 As this is only the backend, to use it without frontend, you could use curl
 
-Exemple:
-  * `curl -X "GET" http://localhost:3000/posts`
-  * `curl -X "POST" --data "post="My%20First%20Post&likes=10&comment=A%20comment" http://localhost:3000/posts`
-  * `curl -X "DELETE" http://localhost:3000/posts/3`
-  * `curl -X "PUT" --data "post=My%20Modyfied%20Post&likes=20" http://localhost:3000/posts/4`
-
-Or in JSON:
-  * `curl --header "Content-Type: application/json" --request POST --data '{"post":"A post","likes":15}' http://localhost:3000/posts`
+Exemple (in JSON, for correct type validation POST and PUT):
+  * `curl --header "Content-Type: application/json" -X GET http://localhost:3000/posts`
+  * `curl --header "Content-Type: application/json" -X POST --data '{"post":"My First Post, "likes":10, "comment":"A comment"}' http://localhost:3000/posts`
+  * `curl --header "Content-Type: application/json" -X DELETE http://localhost:3000/posts/3`
+  * `curl --header "Content-Type: application/json" -X PUT --data '{"post":"My Modyfied Post", "likes":20}' http://localhost:3000/posts/4`
 
 The database configuration is defined in `knexDatabaseConf.ts`, we use mysql but can change, the table name as well as the database for this project is "blog" 
