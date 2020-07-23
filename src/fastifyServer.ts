@@ -32,16 +32,11 @@ async function main(): Promise<{}>{
   }
   })
 
-  try {
-    return await server.listen(Number(config.http.port))
-  } catch (err) {
-      server.log.error(err)
-      process.exit(1)
-  }
+  return await server.listen(Number(config.http.port))
 }
 
 main().catch((err) => {
-  console.error("Fatal error in fastify server")
-  console.error(err)
+  server.log.error("Fatal error in fastify server")
+  server.log.error(err)
   process.exit(1)
 })
