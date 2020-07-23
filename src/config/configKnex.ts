@@ -20,17 +20,17 @@ export async function loadConfigAsync(file: string): Promise<Config> {
   const configFile: Map<string, string> = await readFileAsync(file);
   return {
     http: {
-      port: Number(configFile.get("http_port"))
+      port: Number(configFile.get("HTTP_PORT"))
     },
     client: {
-      client: String(configFile.get("client_client"))
+      client: String(configFile.get("CLIENT_CLIENT"))
     },
     clientParameters: {
-      host: String(configFile.get("client_host")),
-      port: Number(configFile.get("client_port")),
-      user: String(configFile.get("client_user")),
-      password: String(configFile.get("client_password")),
-      database: String(configFile.get("client_database"))
+      host: String(configFile.get("CLIENT_HOST")),
+      port: Number(configFile.get("CLIENT_PORT")),
+      user: String(configFile.get("CLIENT_USER")),
+      password: String(configFile.get("CLIENT_PASSWORD")),
+      database: String(configFile.get("CLIENT_DATABASE"))
     }
   }
 }
