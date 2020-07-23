@@ -10,7 +10,7 @@ import {PostRepository} from './persistances/PostRepository'
 
 async function main(): Promise<{}>{
 
-  const config = await loadConfigAsync('.env.local')
+  const config = await loadConfigAsync('.env')
   const knex = Knex({
     client: String(config.client.client),
     connection: config.clientParameters
