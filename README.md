@@ -1,10 +1,13 @@
 # blogexercise
 
+Launch first:
+* `npm install`
+
 All the code is in `/src`
 
-There is two configurations files `tsconfig.json` to use node with typescript and a small `package.json` for execution
+There is three configurations files `tsconfig.json` to use node with typescript, a small `package.json` for execution and `.env` for server port and database configuration
 
-To lunch project:
+To launch project:
   * `npm run build`
   * `npm run start`
 
@@ -16,4 +19,5 @@ Exemple (in JSON, for correct type validation POST and PUT):
   * `curl --header "Content-Type: application/json" -X DELETE http://localhost:3000/posts/3 -H "Origin: http://localhost"`
   * `curl --header "Content-Type: application/json" -X PUT --data '{"post":"My Modified Post", "likes":20}' http://localhost:3000/posts/4 -H "Origin: http://localhost"`
 
-The database configuration is defined in `knexDatabaseConf.ts`, we use mysql but can change, the table name as well as the database for this project is "blog"
+The database configuration is defined in `configKnex.ts`, we use mysql but can change.
+The table name as well as the database for this project is "blog"
