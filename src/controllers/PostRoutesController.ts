@@ -16,9 +16,10 @@ export function PostRoutes (server:FastifyInstance<Server, IncomingMessage, Serv
     try{
       if(await opts.post.delete(request.params.id)) {
         return response.code(200).header('Content-Type', 'application/json; charset=utf-8').send({response: "Post " + request.params.id + " deleted"})
-      } else { return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: "Nothing to delete"}) }
+      } else { throw new ErrorEvent("Nothing to delete"); }
     } catch(error) {
-      if(error) { throw new Error(error); }
+      if(error instanceof ErrorEvent) { request.log.error(error); return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: error.message}); }
+      else { throw new Error(error); }
     }
   }});
 
@@ -26,9 +27,10 @@ export function PostRoutes (server:FastifyInstance<Server, IncomingMessage, Serv
     try {
       if(isRight(RequestBodyValuesTypePost.decode(request.body)) && await opts.post.createOne(request.body)) {
         return response.code(201).header('Content-Type', 'application/json; charset=utf-8').send({response :"Post created"})
-      } else { return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: "Invalid type or parameter send in body"}) }
+      } else { throw new TypeError("Invalid type or parameter send in body") }
     } catch(error) {
-      if(error) { throw new Error(error); }
+        if(error instanceof TypeError) { request.log.error(error); return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: error.message}); }
+        else { throw new Error(error); }
     }
   }});
 
@@ -42,15 +44,13 @@ export function PostRoutes (server:FastifyInstance<Server, IncomingMessage, Serv
       await Promise.all(Object.keys(request.body).map(async key => {
         const keyDecoded = pipe(requestBody.decode(key), fold(onLeft,  onRight))
         if(isLeft(requestBody.decode(key)) || isLeft(RequestBodyValuesTypePut.decode(request.body)) || !await opts.post.updateOne(Number(request.params.id), request.body, keyDecoded)){
-           throw new Error("Invalid type or parameter send in body")
+           throw new TypeError("Invalid type or parameter send in body")
          }
       }))
       return response.code(200).header('Content-Type', 'application/json; charset=utf-8').send({response: "Post " + request.params.id + " updated"})
     } catch(error) {
-      if(error) {
-        if(error.message === "Invalid type or parameter send in body") { return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: error.message}); }
+        if(error instanceof TypeError) { request.log.error(error); return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: error.message}); }
         else { throw new Error(error); }
-      }
     }
   }});
 
