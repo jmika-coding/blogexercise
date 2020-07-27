@@ -16,6 +16,7 @@ async function main(): Promise<{}>{
     connection: config.clientParameters
   })
 
+  server.log.info("Starting server")
   const postRepository = new PostRepository(knex);
 
   server.register(require('fastify-formbody'))
