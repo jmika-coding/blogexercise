@@ -2,7 +2,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/fastifyServer.js",
-    "start-save-logs": "node dist/fastifyServer.js logs"
+    "start-save-logs": "node dist/fastifyServer.js logs",
+    "start:watch": "nodemon --watch src --ignore src/generated -e ts --exec 'npm run build && npm run start'"
   },
   "dependencies": {
     "fastify": "3.1.1",
@@ -19,6 +20,7 @@
     "@types/pino": "6.3.0",
     "ts-node": "8.10.2",
     "typescript": "3.9.7",
+    "nodemon": "2.0.4",
     "pino-pretty": "2.6.1"
   }
 }
