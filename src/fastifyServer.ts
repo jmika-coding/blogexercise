@@ -31,8 +31,26 @@ async function main(): Promise<{}>{
   const config = await loadConfigAsync('.env')
   const knex = Knex({
     client: String(config.client.client),
-    connection: config.clientParameters
+    connection: config.clientParameters,
+    migrations: { directory: "./dist/migrations" },
+    seeds: { directory: "./test/seeds" }
   })
+
+  // MIGRATIONS
+  server.log.info("Applying migrations and/or seeds");
+  try {
+    // MIGRATIONS
+    await knex.migrate.latest();
+    // FILL TABLE IF RUN APP WITH OPTION SEEDS
+    if (process.argv.length === 3 && process.argv[2] === "seed") {
+      knex.seed.run();
+    }
+  } catch (error) {
+    server.log.error("Unable to migrate DB");
+    server.log.error(error);
+    process.exit(1);
+  }
+  server.log.info("Applied migrations and/or seeds");
 
   // START SERVER
   server.log.info("Starting server")

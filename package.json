@@ -2,6 +2,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/fastifyServer.js",
+    "start-seeds": "node dist/fastifyServer.js seed",
     "start-save-logs": "node dist/fastifyServer.js logs",
     "start:watch": "nodemon --watch src --ignore src/generated -e ts --exec 'npm run build && npm run start'"
   },
