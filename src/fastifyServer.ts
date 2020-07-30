@@ -7,7 +7,9 @@ import * as Knex from 'knex'
 import {loadConfigAsync} from './config/configKnex'
 
 import {PostRoutes} from './controllers/PostRoutesController'
+import {CommentRoutes} from './controllers/CommentRoutesController'
 import {PostRepository} from './persistances/PostRepository'
+import {CommentRepository} from './persistances/CommentRepository'
 import { Server, IncomingMessage, ServerResponse } from 'http';
 
 // CONFIG LOG FASTIFY
@@ -55,9 +57,12 @@ async function main(): Promise<{}>{
   // START SERVER
   server.log.info("Starting server")
   const postRepository = new PostRepository(knex);
+  const commentRepository = new CommentRepository(knex);
 
   server.register(require('fastify-formbody'))
+
   server.register(PostRoutes, {post: postRepository})
+  server.register(CommentRoutes, {postComment: commentRepository})
 
   server.register(require('fastify-cors'), {
     origin: (origin:any, cb:any) => {

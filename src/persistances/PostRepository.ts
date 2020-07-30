@@ -8,7 +8,7 @@ export class PostRepository {
 
   delete = (postIdToDelete: number) => this.knex('blog').where('id', postIdToDelete).del()
 
-  createOne = (requestBody: RequestBodyPost) => this.knex('blog').insert({ post: requestBody.post, likes: requestBody.likes, comment: requestBody.comment })
+  createOne = (requestBody: RequestBodyPost) => this.knex('blog').insert({ title: requestBody.title, post: requestBody.post, likes: requestBody.likes })
 
   updateOne = (requestParamsId: number, requestBody: RequestBodyDefault, keyDecoded: string) => this.knex('blog').where('id', requestParamsId).update({[keyDecoded]: requestBody[keyDecoded]})
 

@@ -8,7 +8,7 @@ import { isLeft, isRight } from 'fp-ts/lib/Either'
 import {RouteGenericInterface, RequestGenericInterfaceForPost, RequestBodyValuesTypePost, requestBody, RequestBodyValuesTypePut} from "../models/Post"
 import {PostRepository} from "persistances/PostRepository"
 
-// Routes
+// Routes /posts for all posts
 export function PostRoutes (server:FastifyInstance<Server, IncomingMessage, ServerResponse, FastifyLoggerInstance>, opts: {post: PostRepository}, next: any) {
   server.route({method: 'GET', url: '/posts', handler: async (_, response) => response.code(200).header('Content-Type', 'application/json; charset=utf-8').send(await opts.post.getAll()) });
 
