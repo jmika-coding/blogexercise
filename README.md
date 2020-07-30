@@ -21,3 +21,10 @@ Exemple (in JSON, for correct type validation POST and PUT):
 
 The database configuration is defined in `configKnex.ts`, we use mysql but can change.
 The table name as well as the database for this project is "blog"
+
+Other commands:
+  * `npm run start-seeds` to seed the database, put test data in it
+  * `npm run start-save-logs` to save logs in a file instead of printing to console
+  * `npm run start:watch` to start app and restart when change in files (for developpement)
+
+Technologies used: We use `nodemon` for restarting when change, `pino` as logger included in `fastify`, `knex` for managing `mysql` database, `fp-ts`, `io-ts` for functionnal programming and check type at runtime, `fastify-cors` for cors validation
