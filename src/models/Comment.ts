@@ -16,3 +16,10 @@ export interface RequestGenericInterfaceForPost {
 
 export const RequestBodyValuesType = t.type({comment: t.string})
 export type RequestBodyValuesType = t.TypeOf<typeof RequestBodyValuesType>
+
+export const Querystring = t.type({ postId: t.number })
+
+export interface RequestGenericInterfaceForComment {
+  Querystring: t.TypeOf<typeof Querystring>;
+  Body: t.TypeOf<typeof Comment>;
+}

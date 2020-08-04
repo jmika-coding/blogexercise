@@ -15,10 +15,10 @@ export function PostRoutes (server:FastifyInstance<Server, IncomingMessage, Serv
   server.route({method: 'DELETE', url: '/posts/:id', handler: async (request:FastifyRequest<RouteGenericInterface, Server, IncomingMessage>, response) => {
     try{
       if(await opts.post.delete(request.params.id)) {
-        return response.code(200).header('Content-Type', 'application/json; charset=utf-8').send({response: "Post " + request.params.id + " deleted"})
+        return response.code(204).header('Content-Type', 'application/json; charset=utf-8').send({response: "Post " + request.params.id + " deleted"})
       } else { throw new ErrorEvent("Nothing to delete"); }
     } catch(error) {
-      if(error instanceof ErrorEvent) { request.log.error(error); return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: error.message}); }
+      if(error instanceof ErrorEvent) { request.log.error(error); return response.code(404).header('Content-Type', 'application/json; charset=utf-8').send({error: error.message}); }
       else { throw new Error(error); }
     }
   }});
@@ -34,7 +34,7 @@ export function PostRoutes (server:FastifyInstance<Server, IncomingMessage, Serv
     }
   }});
 
-  server.route({method: 'PUT', url: '/posts/:id', handler: async (request:FastifyRequest<RouteGenericInterface, Server, IncomingMessage>, response) => {
+  server.route({method: 'PATCH', url: '/posts/:id', handler: async (request:FastifyRequest<RouteGenericInterface, Server, IncomingMessage>, response) => {
     try {
       // failure handler
       const onLeft = (errors: t.Errors): string => `${errors.length} error(s) found`
@@ -47,7 +47,7 @@ export function PostRoutes (server:FastifyInstance<Server, IncomingMessage, Serv
            throw new TypeError("Invalid type or parameter send in body")
          }
       }))
-      return response.code(200).header('Content-Type', 'application/json; charset=utf-8').send({response: "Post " + request.params.id + " updated"})
+      return response.code(204).header('Content-Type', 'application/json; charset=utf-8').send({response: "Post " + request.params.id + " updated"})
     } catch(error) {
         if(error instanceof TypeError) { request.log.error(error); return response.code(400).header('Content-Type', 'application/json; charset=utf-8').send({error: error.message}); }
         else { throw new Error(error); }

@@ -4,12 +4,12 @@ import {RequestBodyPost, RequestBodyDefault} from "models/Post"
 export class PostRepository {
   constructor(private knex: knex) {}
 
-  getAll = () => this.knex.select().from('blog');
+  getAll = () => this.knex.select().from('post');
 
-  delete = (postIdToDelete: number) => this.knex('blog').where('id', postIdToDelete).del()
+  delete = (postIdToDelete: number) => this.knex('post').where('id', postIdToDelete).del()
 
-  createOne = (requestBody: RequestBodyPost) => this.knex('blog').insert({ title: requestBody.title, post: requestBody.post, likes: requestBody.likes })
+  createOne = (requestBody: RequestBodyPost) => this.knex('post').insert({ title: requestBody.title, post: requestBody.post, likes: requestBody.likes })
 
-  updateOne = (requestParamsId: number, requestBody: RequestBodyDefault, keyDecoded: string) => this.knex('blog').where('id', requestParamsId).update({[keyDecoded]: requestBody[keyDecoded]})
+  updateOne = (requestParamsId: number, requestBody: RequestBodyDefault, keyDecoded: string) => this.knex('post').where('id', requestParamsId).update({[keyDecoded]: requestBody[keyDecoded]})
 
 }
