@@ -12,7 +12,7 @@
     "fastify-formbody": "4.0.3",
     "fp-ts": "2.7.1",
     "io-ts": "2.2.9",
-    "knex": "0.21.2",
+    "knex": "2.4.0",
     "mysql": "2.18.1"
   },
   "devDependencies": {
